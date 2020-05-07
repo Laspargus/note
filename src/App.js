@@ -7,37 +7,39 @@ import NoteList from "./components/notelist";
 import NewNote from "./components/newnote";
 
 const App = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
   const [notelist, setNoteList] = useState([]);
   const [type, setType] = useState("new");
   const [currentId, setCurrentId] = useState("");
   const [noteId, setNoteId] = useState(0);
 
-  const saveInput = (e, note) => {
+  const saveInput = (e) => {
     e.preventDefault();
-    setTitle(note.title);
-    setContent(note.content);
 
     if (type === "new") {
       setNoteId(noteId + 1);
-      note["id"] = noteId;
-
-      setNoteList([...notelist, note]);
+      let newNote = {};
+      newNote["content"] = content;
+      newNote["title"] = title;
+      newNote["id"] = noteId;
+      setNoteList([...notelist, newNote]);
       setCurrentId(noteId);
     } else {
       let noteIndex = notelist.findIndex((note) => note.id === currentId);
-      notelist[noteIndex].content = note.content;
-      notelist[noteIndex].title = note.title;
+      notelist[noteIndex].content = content;
+      notelist[noteIndex].title = title;
       setNoteList([...notelist]);
     }
 
     setType("edit");
   };
 
-  const addInput = (note) => {
-    setTitle(note.title);
-    setContent(note.content);
+  const addTitleInput = (e) => {
+    setTitle(e.currentTarget.value);
+  };
+  const addContentInput = (e) => {
+    setContent(e.currentTarget.value);
   };
 
   const newForm = () => {
@@ -63,10 +65,10 @@ const App = () => {
       <div className="App col-md-8">
         <NoteDisplay title={title} content={content} />
         <MarkDownInput
-          type={type}
-          defTitle={title}
-          defContent={content}
-          handleChange={addInput}
+          title={title}
+          content={content}
+          handleTitleChange={addTitleInput}
+          handleContentChange={addContentInput}
           handleClick={saveInput}
         />
       </div>

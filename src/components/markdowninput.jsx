@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from "react";
 
-const MarkDownInput = ({ defTitle, defContent, handleChange, handleClick }) => {
-  const [input, setInput] = useState({});
-  const handleInputChange = (e) =>
-    setInput({
-      ...input,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-
-  useEffect(() => {
-    handleChange(input);
-  }, [input]);
-
+const MarkDownInput = ({
+  title,
+  content,
+  handleTitleChange,
+  handleContentChange,
+  handleClick,
+}) => {
   return (
     <form>
       <div className="form-group">
         <input
-          onChange={handleInputChange}
+          onChange={(e) => handleTitleChange(e)}
           type="text"
           className="form-control"
           name="title"
-          placeholder="title"
-          value={defTitle}
+          placeholder="Le titre de votre note"
+          value={title}
         />
       </div>
       <div className="form-group">
         <textarea
           className="form-control"
           name="content"
-          onChange={handleInputChange}
+          onChange={(e) => handleContentChange(e)}
           rows="10"
-          placeholder="content"
-          value={defContent}
+          placeholder="Le contenu de votre note"
+          value={content}
         ></textarea>
       </div>
       <input
-        onClick={(e) => handleClick(e, input)}
+        onClick={(e) => handleClick(e)}
         className="btn btn-warning"
         type="submit"
+        value="Sauvegarder"
       />
     </form>
   );
