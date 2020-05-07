@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-const NotePreview = ({ content, title }) => {
+const NotePreview = ({ id, title, content, handleClickPreview }) => {
   return (
-    <div>
+    <div
+      onClick={(e) => {
+        handleClickPreview(e, id, title, content);
+      }}
+    >
       <h3 className="text-primary">{title}</h3>
-      <p>{title}</p>
+      <p>{content}</p>
     </div>
   );
 };

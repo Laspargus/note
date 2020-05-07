@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Showdown from "showdown";
 
-const NoteDisplay = ({ title, content }) => {
+const NoteDisplay = ({ id, title, content }) => {
   const converter = new Showdown.Converter();
   let htmlContent = converter.makeHtml(content);
 

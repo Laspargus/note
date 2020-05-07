@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-const MarkDownInput = ({ handleChange, handleClick }) => {
+const MarkDownInput = ({ defTitle, defContent, handleChange, handleClick }) => {
   const [input, setInput] = useState({});
-
   const handleInputChange = (e) =>
     setInput({
       ...input,
       [e.currentTarget.name]: e.currentTarget.value,
     });
 
+  useEffect(() => {
+    handleChange(input);
+  }, [input]);
+
   return (
-    <form
-      onChange={() => {
-        handleChange(input);
-      }}
-    >
+    <form>
       <div className="form-group">
         <input
           onChange={handleInputChange}
@@ -22,6 +21,7 @@ const MarkDownInput = ({ handleChange, handleClick }) => {
           className="form-control"
           name="title"
           placeholder="title"
+          value={defTitle}
         />
       </div>
       <div className="form-group">
@@ -31,6 +31,7 @@ const MarkDownInput = ({ handleChange, handleClick }) => {
           onChange={handleInputChange}
           rows="10"
           placeholder="content"
+          value={defContent}
         ></textarea>
       </div>
       <input

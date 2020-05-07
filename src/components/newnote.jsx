@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const NewNote = ({ title, content }) => {
+const NewNote = ({ handleClick, title, content }) => {
   return (
     <div>
-      <button className="btn btn-warning">Ajouter une note</button>
+      <button onClick={handleClick} className="btn btn-warning">
+        Ajouter une note
+      </button>
     </div>
   );
 };

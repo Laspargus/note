@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import NotePreview from "./notepreview";
 
-const NoteList = ({ notelist }) => {
-  console.log("je suis dans mon notelist", notelist);
-  notelist.map((list) => console.log("hey"));
+const NoteList = ({ notelist, handleClickPreview }) => {
   return (
     <>
-      <div>
+      <div className="mt-5">
         {notelist.map((note, index) => (
-          <NotePreview key={index} content={note.content} title={note.title} />
+          <NotePreview
+            handleClickPreview={handleClickPreview}
+            key={index}
+            id={note.id}
+            content={note.content}
+            title={note.title}
+          />
         ))}
       </div>
     </>
