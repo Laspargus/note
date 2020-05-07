@@ -14,6 +14,17 @@ const App = () => {
   const [currentId, setCurrentId] = useState("");
   const [noteId, setNoteId] = useState(0);
 
+  useEffect(() => {
+    /// récupérer les infos en localstorage si rechargement de la page
+    const notes = JSON.parse(localStorage.getItem("myNotes"));
+    setNoteList(notes);
+  }, []);
+
+  useEffect(() => {
+    ///enregistrer lesmodifications en localstorage
+    localStorage.setItem("myNotes", JSON.stringify(notelist));
+  }, [notelist]);
+
   const saveInput = (e) => {
     e.preventDefault();
 
