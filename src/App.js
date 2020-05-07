@@ -11,11 +11,16 @@ const App = () => {
   const [content, setContent] = useState("");
   const [notelist, setNoteList] = useState([]);
 
-  const addInput = (e, note) => {
+  const saveInput = (e, note) => {
     e.preventDefault();
     setTitle(note.title);
     setContent(note.content);
     setNoteList([...notelist, note]);
+  };
+
+  const addInput = (note) => {
+    setTitle(note.title);
+    setContent(note.content);
   };
 
   return (
@@ -26,7 +31,7 @@ const App = () => {
       </div>
       <div className="App col-md-8">
         <NoteDisplay title={title} content={content} />
-        <MarkDownInput handleClick={addInput} />
+        <MarkDownInput handleChange={addInput} handleClick={saveInput} />
       </div>
     </div>
   );

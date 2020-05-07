@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const MarkDownInput = ({ handleClick }) => {
+const MarkDownInput = ({ handleChange, handleClick }) => {
   const [input, setInput] = useState({});
 
   const handleInputChange = (e) =>
@@ -10,7 +10,11 @@ const MarkDownInput = ({ handleClick }) => {
     });
 
   return (
-    <form>
+    <form
+      onChange={() => {
+        handleChange(input);
+      }}
+    >
       <div className="form-group">
         <input
           onChange={handleInputChange}
@@ -30,9 +34,9 @@ const MarkDownInput = ({ handleClick }) => {
         ></textarea>
       </div>
       <input
+        onClick={(e) => handleClick(e, input)}
         className="btn btn-warning"
         type="submit"
-        onClick={(e) => handleClick(e, input)}
       />
     </form>
   );
